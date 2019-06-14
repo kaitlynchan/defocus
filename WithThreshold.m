@@ -2,12 +2,14 @@ clear all
 close all
 clc
 
-distances=1:1:24;
+%focus ~14mm
+
+distances=7.5:0.5:17.5;
 radius=zeros(1,length(distances));
-threshold=15;
+threshold=20;
 for index=1:length(distances)
 
-filename=['stagePos2_exp03_image_',num2str(distances(index)*10),'.png'];
+filename=['stagePos2_exp_03_image_',num2str(distances(index)*10),'.png'];
 A=imread(filename);
 A=rgb2gray(A);
 Filtered=find(A>threshold);

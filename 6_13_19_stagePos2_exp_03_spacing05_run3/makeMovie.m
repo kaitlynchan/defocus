@@ -23,8 +23,7 @@ A_d2=sum(A,2);
 
 margin=25;
 intensities = A(ind_d2, ind_d1-margin:ind_d1+margin);
-range = (1:51);
-plot(range, intensities,'o');
+plot(intensities,'o');
 axis([0 60 0 260]);
 drawnow
 

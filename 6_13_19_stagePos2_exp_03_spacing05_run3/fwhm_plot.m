@@ -14,24 +14,27 @@ for index=1:length(distances)
 
     A_d2=sum(A,2);
 
-    [~,ind_d1]=max(A_d1);
-    [~,ind_d2]=max(A_d2);
+    %[~,ind_d1]=max(A_d1);
+    %[~,ind_d2]=max(A_d2);
 
-    [m,hm_idx] = max(A(ind_d2,:));
-    hm = m/2;
-    margin=25;
-    intensities = A(ind_d2, :);
-    width = find(intensities>=hm);
-    %for pixel=1:length(intensities)
-        
-        %if intensities(pixel) >= hm
-          %width = width + 1; 
-        %end
-        
-    %end
+    [m,n]=find(A==max(max(A)));
+    ind_d2 = m:m;
+    ind_d1 = n:n;
+    
+    hm = max(max(A))/2;
+
+    margin=50;
+    intensitiesX = A(ind_d2, :);
+    intensitiesY = A(:, ind_d1);
+    
+    width = find(intensitiesX >= hm);
     
     fwhm(index) = length(width);
 end
 
 figure;
 plot(distances, fwhm, 'o');
+title('full-width half-maximum: horizontal axis');
+xlabel("distance (mm)");
+ylabel('fwhm (pixels)');
+

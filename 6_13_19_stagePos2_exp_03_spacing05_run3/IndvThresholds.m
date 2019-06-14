@@ -7,30 +7,21 @@ radius=zeros(1,length(distances));
 
 for index=1:length(distances)
     
-    filename=['stagePos2_exp_03_image_',num2str(distances(index)*10),'.png'];
+    filename=['stagePos2_exp_0412_image_',num2str(distances(index)*10),'.png'];
     A=imread(filename);
     A=rgb2gray(A);
     A=double(A);
-    A_d1=sum(A,1);
 
-    A_d2=sum(A,2);
-
-    %[~,ind_d1]=max(A_d1);
-    %[~,ind_d2]=max(A_d2);
-
-    [m,n]=find(A==max(max(A)));
-
-    ind_d2 = m:m;
-    ind_d1 = n:n;
-
-    [m,hm_idx] = max(A(ind_d2,:));
-    hm = m/2;
+    hm = max(max(A))/2;
     
     Filtered=find(A>hm);
-    radius(index)=length(Filtered);
+    radius(index)=sqrt((length(Filtered))/pi);
     fprintf('Distance: %2.1f | Threshold: %2.1f .\n',distances(index),hm);
 end
 
 figure;
 plot(distances,radius,'o');
+title('Max/2 Thresholds, non-saturated');
+xlabel('Distances (mm)');
+ylabel('Radius');
 
