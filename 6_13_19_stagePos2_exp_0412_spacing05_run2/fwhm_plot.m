@@ -6,7 +6,7 @@ fwhm=zeros(1,length(distances));
 
 for index=1:length(distances)
     
-    filename=['stagePos2_exp_03_image_',num2str(distances(index)*10),'.png'];
+    filename=['stagePos2_exp_0412_image_',num2str(distances(index)*10),'.png'];
     A=imread(filename);
     A=rgb2gray(A);
     A=double(A);
@@ -33,7 +33,7 @@ for index=1:length(distances)
 end
 
 figure;
-plot(distances, fwhm, 'o');
+plot(distances, fwhm, 'o-');
 title('full-width half-maximum: horizontal axis');
 xlabel("distance (mm)");
 ylabel('fwhm (pixels)');

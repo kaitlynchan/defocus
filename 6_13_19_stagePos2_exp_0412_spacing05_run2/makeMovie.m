@@ -30,8 +30,8 @@ margin=50;
 intensitiesX = A(ind_d2, ind_d1-margin:ind_d1+margin);
 intensitiesY = A(ind_d2-margin:ind_d2+margin, ind_d1);
 
-plot(intensitiesY,'o');
-title({'vertical cross section', "Distance: "+ num2str(distances(index))});
+plot(intensitiesX,'o');
+title({'horizontal cross section', "Distance: "+ num2str(distances(index))});
 xlabel('range of pixels');
 ylabel('pixel intensity');
 axis([0 110 0 300]);
