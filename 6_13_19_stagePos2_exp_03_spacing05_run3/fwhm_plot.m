@@ -22,6 +22,7 @@ for index=1:length(distances)
     ind_d1 = n:n;
     
     hm = max(max(A))/2;
+    fprintf('Distance: %2.1f | Threshold: %2.1f .\n',distances(index),hm);
 
     margin=50;
     intensitiesX = A(ind_d2, :);
@@ -33,7 +34,7 @@ for index=1:length(distances)
 end
 
 figure;
-plot(distances, fwhm, 'o');
+plot(distances, fwhm, 'o-');
 title('full-width half-maximum: horizontal axis');
 xlabel("distance (mm)");
 ylabel('fwhm (pixels)');

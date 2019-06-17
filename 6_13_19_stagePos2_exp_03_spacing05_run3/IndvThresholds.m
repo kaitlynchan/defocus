@@ -7,7 +7,7 @@ radius=zeros(1,length(distances));
 
 for index=1:length(distances)
     
-    filename=['stagePos2_exp_0412_image_',num2str(distances(index)*10),'.png'];
+    filename=['stagePos2_exp_03_image_',num2str(distances(index)*10),'.png'];
     A=imread(filename);
     A=rgb2gray(A);
     A=double(A);
@@ -21,7 +21,7 @@ end
 
 figure;
 plot(distances,radius,'o');
-title('Max/2 Thresholds, non-saturated');
+title('Defocusing Effect, Saturated Images');
 xlabel('Distances (mm)');
 ylabel('Radius');
 

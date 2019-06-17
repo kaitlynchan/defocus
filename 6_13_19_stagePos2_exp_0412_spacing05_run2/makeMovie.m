@@ -4,7 +4,7 @@ clc
 
 h=figure;
 axis tight manual
-filename_gif='testanimated.gif';
+filename_gif='testanimatedY.gif';
 
 distances=7.5:0.5:17.5;
 radius=zeros(1,length(distances));
@@ -30,8 +30,8 @@ margin=50;
 intensitiesX = A(ind_d2, ind_d1-margin:ind_d1+margin);
 intensitiesY = A(ind_d2-margin:ind_d2+margin, ind_d1);
 
-plot(intensitiesX,'o');
-title({'horizontal cross section', "Distance: "+ num2str(distances(index))});
+plot(intensitiesY,'o');
+title({'vertical cross section', "Distance: "+ num2str(distances(index))});
 xlabel('range of pixels');
 ylabel('pixel intensity');
 axis([0 110 0 300]);
@@ -45,7 +45,7 @@ drawnow
     if index==1
               imwrite(imind,cm,filename_gif,'gif', 'Loopcount',inf); 
     else
-              imwrite(imind,cm,filename_gif,'gif','DelayTime',0.75,'WriteMode','append'); 
+              imwrite(imind,cm,filename_gif,'gif','DelayTime',0.5,'WriteMode','append'); 
     end
 end
 
