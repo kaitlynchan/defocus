@@ -6,14 +6,14 @@ clc
 
 distances=7.5:0.5:17.5;
 radius=zeros(1,length(distances));
-threshold=20;
+threshold=34.8;
 for index=1:length(distances)
 
 filename=['stagePos2_exp_0412_image_',num2str(distances(index)*10),'.png'];
 A=imread(filename);
 A=rgb2gray(A);
 Filtered=find(A>threshold);
-radius(index)=length(Filtered);
+    radius(index)=sqrt((length(Filtered))/pi);
 %figure(1)
 %imshow(A)
 end

@@ -33,7 +33,7 @@ for index=1:length(distances)
 end
 
 figure;
-plot(distances, fwhm, 'o-');
+plot(distances, fwhm, 'o');
 title('full-width half-maximum: horizontal axis');
 xlabel("distance (mm)");
 ylabel('fwhm (pixels)');
