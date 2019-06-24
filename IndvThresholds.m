@@ -7,10 +7,10 @@ radius=zeros(1,length(distances));
 
 for index=1:length(distances)
     
-    filename=['stagePos2_exp_0412_image_',num2str(distances(index)*10),'.png'];
+    filename=['stagePos2_exp_0092_image_',num2str(distances(index)*10),'.png'];
     A=imread(filename);
-    A=rgb2gray(A);
     A=double(A);
+    A = A(:,:,1);
 
     hm = max(max(A))/2;
     
@@ -20,8 +20,27 @@ for index=1:length(distances)
 end
 
 figure;
-plot(distances,radius,'o');
+
+plot(distances(1,1:10),radius(1,1:10),'o');
 title('Max/2 Thresholds, non-saturated');
 xlabel('Distances (mm)');
 ylabel('Radius');
+l1 = lsline
+%forward slash (J\F) means solving J dx = F for dx (matrix v eq).
+%solving long line of y = mx + b
+B1 = [ones(size(l1.XData(:))), l1.XData(:)]\l1.YData(:);
+Slope1 = B1(2)
+Intercept1 = B1(1)
+
+figure;
+
+plot(distances(1,10:21),radius(1,10:21),'o');
+title('Max/2 Thresholds, non-saturated');
+xlabel('Distances (mm)');
+ylabel('Radius');
+l2 = lsline
+B2 = [ones(size(l2.XData(:))), l2.XData(:)]\l2.YData(:);
+Slope2 = B2(2)
+Intercept2 = B2(1)
+
 

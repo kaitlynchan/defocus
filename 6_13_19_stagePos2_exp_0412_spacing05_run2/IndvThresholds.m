@@ -9,8 +9,8 @@ for index=1:length(distances)
     
     filename=['stagePos2_exp_0412_image_',num2str(distances(index)*10),'.png'];
     A=imread(filename);
-    A=rgb2gray(A);
     A=double(A);
+    A = A(:,:,1);
 
     hm = max(max(A))/2;
     
@@ -21,7 +21,7 @@ end
 
 figure;
 plot(distances,radius,'o');
-title('Defocusing Effect, unsaturated Images');
+title('Max/2 Thresholds, non-saturated');
 xlabel('Distances (mm)');
 ylabel('Radius');
 

@@ -20,8 +20,30 @@ for index=1:length(distances)
 end
 
 figure;
-plot(distances,radius,'o');
-title('Max/2 Thresholds, non-saturated');
+
+plot(distances(1,3:10),radius(1,3:10),'o');
 xlabel('Distances (mm)');
 ylabel('Radius');
+l1 = lsline
+%forward slash (J\F) means solving J dx = F for dx (matrix v eq).
+%solving long line of y = mx + b
+B1 = [ones(size(l1.XData(:))), l1.XData(:)]\l1.YData(:);
+Slope1 = B1(2)
+Intercept1 = B1(1)
+title({'Indv. Thresholds', "Slope: "+num2str(Slope1)});
+axis([7 13 7 10]);
+
+
+figure;
+plot(distances(1,10:21),radius(1,10:21),'o');
+xlabel('Distances (mm)');
+ylabel('Radius');
+l2 = lsline
+B2 = [ones(size(l2.XData(:))), l2.XData(:)]\l2.YData(:);
+Slope2 = B2(2)
+Intercept2 = B2(1)
+title({'Semi Indv. Thresholds', "Slope: "+num2str(Slope2)});
+axis([12 18 7 10]);
+
+
 

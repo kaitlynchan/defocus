@@ -4,7 +4,7 @@ clc
 
 h=figure;
 axis tight manual
-filename_gif='testanimatedX.gif';
+filename_gif='testanimatedOverlay.gif';
 
 distances=7.5:0.5:17.5;
 radius=zeros(1,length(distances));
