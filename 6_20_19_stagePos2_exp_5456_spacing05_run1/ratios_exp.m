@@ -31,8 +31,8 @@ plot(u_vec, m_vec,'o');
 title('Magnification of image vs distance to lens (experiment data)');
 xlabel('delta u (u1 = 52 mm) - [change in object to lens distance]');
 ylabel('Magnification (with respect to the first image)');
-hold on
-p = polyfit(u_vec, m_vec,3);
-x1 = linspace(0,25);
-y1 = polyval(p,x1);
-plot(x1,y1);
+%hold on
+%p = polyfit(u_vec, m_vec,3);
+%x1 = linspace(0,25);
+%y1 = polyval(p,x1);
+%plot(x1,y1);

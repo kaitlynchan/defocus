@@ -23,8 +23,8 @@ title('Ideal magnification vs delta u');
 xlabel('delta (u1 = 20 mm) - [change in object to lens distance]');
 ylabel('Ideal magnification');
 
-%hold on
-%p = polyfit(u_vec, m_vec,5);
-%x1 = linspace(0,25);
-%y1 = polyval(p,x1);
-%plot(x1,y1);
+hold on
+p = polyfit(u_vec, m_vec,3);
+x1 = linspace(0,25);
+y1 = polyval(p,x1);
+plot(x1,y1);

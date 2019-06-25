@@ -5,6 +5,8 @@ clear all; close all; clc
 distances=7.5:0.5:17.5;
 focus_idx = 12;
 radius=zeros(1,length(distances));
+pos=zeros(1,length(distances));
+
 
 h=figure;
 axis tight manual
@@ -36,7 +38,7 @@ for index=1:9
         Filtered=find(A>hm(1,1));
         radius(dist_idx)=sqrt((length(Filtered))/pi);
         
-        disp("Distance: " + distances(dist_idx));
+        disp("Distance: " + (25-distances(dist_idx)));
         disp("HM: " + hm(1,1));
 
         margin=50;
@@ -44,45 +46,29 @@ for index=1:9
         intensitiesY = A(ind_d2-margin:ind_d2+margin, ind_d1);
         
         plot(intensitiesY,'o','Color', plotColor);
-        title({"vertical cross section symmetric about: "+num2str(distances(focus_idx)), "Red: "+num2str(distances(focus_idx+index)), "Blue: "+num2str(distances(focus_idx-index))});
+        title({"vertical cross section symmetric about: "+num2str(25-distances(focus_idx)), "Red: "+num2str(25-distances(focus_idx+index)), "Blue: "+num2str(25-distances(focus_idx-index))});
         xlabel('range of pixels');
         ylabel('pixel intensity');
         axis([0 110 0 300]);
-        pause(0.35);
+        pause(0.5);
         
         hold on
         
-        %drawnow
+        drawnow
 
-        %frame = getframe(h); 
-        %im = frame2im(frame); 
-        %[imind,cm] = rgb2ind(im,256); 
+        frame = getframe(h); 
+        im = frame2im(frame); 
+        [imind,cm] = rgb2ind(im,256); 
 
-            %if index==1 && inner ==1
-                      %imwrite(imind,cm,filename_gif,'gif', 'Loopcount',inf); 
-            %else
-                      %imwrite(imind,cm,filename_gif,'gif','DelayTime',0.5,'WriteMode','append'); 
-            %end
+            if index==1 && inner ==1
+                      imwrite(imind,cm,filename_gif,'gif', 'Loopcount',inf); 
+            else
+                      imwrite(imind,cm,filename_gif,'gif','DelayTime',0.75,'WriteMode','append'); 
+            end
 
         end
-pause(1);
+%pause(1);
 
 end
-
-%get the focus point 
-filename=['stagePos2_exp_0092_image_',num2str(distances(focus_idx)*10),'.png'];
-A=imread(filename);
-A=double(A);
-A = A(:,:,1);
-[m,n]=find(A==max(max(A)));
-hm = max(max(A))/2;
-Filtered=find(A>hm);
-radius(focus_idx)=sqrt((length(Filtered))/pi);
-
-figure;
-plot(distances,radius,'o');
-xlabel('Distances (mm)');
-ylabel('Radius');
-title('Semi-Indv. Thresholds');
 
 

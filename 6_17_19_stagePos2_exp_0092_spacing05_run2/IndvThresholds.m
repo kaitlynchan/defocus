@@ -2,7 +2,7 @@ clear all; close all; clc
 distances=7.5:0.5:17.5;
 fwhm=zeros(1,length(distances));
 radius=zeros(1,length(distances));
-
+buffer = ones(1,length(distances)) * 25;
 %plots the radius of the beam with half maximum threshold
 
 for index=1:length(distances)
@@ -16,34 +16,32 @@ for index=1:length(distances)
     
     Filtered=find(A>hm);
     radius(index)=sqrt((length(Filtered))/pi);
-    fprintf('Distance: %2.1f | Threshold: %2.1f .\n',distances(index),hm);
+    fprintf('Distance: %2.1f | Threshold: %2.1f .\n',25 - distances(index),hm);
 end
 
 figure;
 
-plot(distances(1,3:10),radius(1,3:10),'o');
-xlabel('Distances (mm)');
+plot(buffer - distances,radius,'o');
+xlabel('stage position (increasing mm distance from source)');
 ylabel('Radius');
-l1 = lsline
+
 %forward slash (J\F) means solving J dx = F for dx (matrix v eq).
 %solving long line of y = mx + b
-B1 = [ones(size(l1.XData(:))), l1.XData(:)]\l1.YData(:);
-Slope1 = B1(2)
-Intercept1 = B1(1)
-title({'Indv. Thresholds', "Slope: "+num2str(Slope1)});
-axis([7 13 7 10]);
+
+title('Radius of beam');
 
 
-figure;
-plot(distances(1,10:21),radius(1,10:21),'o');
-xlabel('Distances (mm)');
-ylabel('Radius');
-l2 = lsline
-B2 = [ones(size(l2.XData(:))), l2.XData(:)]\l2.YData(:);
-Slope2 = B2(2)
-Intercept2 = B2(1)
-title({'Semi Indv. Thresholds', "Slope: "+num2str(Slope2)});
-axis([12 18 7 10]);
+
+%figure;
+%plot(buffer(1,10:21) - distances(1,10:21),radius(1,10:21),'o');
+%xlabel('Distances (mm)');
+%ylabel('Radius');
+%l2 = lsline
+%B2 = [ones(size(l2.XData(:))), l2.XData(:)]\l2.YData(:);
+%Slope2 = B2(2)
+%Intercept2 = B2(1)
+%title({'Semi Indv. Thresholds', "Slope: "+num2str(Slope2)});
+%axis([12 18 7 10]);
 
 
 
