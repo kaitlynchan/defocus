@@ -11,16 +11,16 @@ for index=1:length(distances)
 
 filename=['stagePos2_exp_5456_image_',num2str(distances(index)*10),'.png'];
 A=imread(filename);
-A=rgb2gray(A);
-A = imbinarize(A);
-A_r = (A * (75+(index*2))) + 2*index;
-A_g = A * (172+ (index));
-A_b = A * (172+ (index)) + 2*index;
-red = uint8(A_r);
-green = uint8(A_g);
-blue = uint8(A_b);
-A_full = cat(3,red,green,blue);
-imshow(A_full);
+%A=rgb2gray(A);
+%A = imbinarize(A);
+%A_r = (A * (75+(index*2))) + 2*index;
+%A_g = A * (172+ (index));
+%A_b = A * (172+ (index)) + 2*index;
+%red = uint8(A_r);
+%green = uint8(A_g);
+%blue = uint8(A_b);
+%A_full = cat(3,red,green,blue);
+imshow(A);
 
 drawnow
 
