@@ -1,0 +1,45 @@
+%plots the maximum intensity over a range of columns across the center
+%horizontal axis of the beam. ideally gaussian curve. 
+
+clear all; close all; clc
+
+filename=['pos_25_exp_30_run2.png'];
+A=imread(filename);
+A=rgb2gray(A);
+figure();
+imshow(A);
+A=double(A);
+
+[m,n]=find(A==max(max(A)));
+
+ind_d2 = m:m;
+ind_d1 = n:n;
+fprintf('Col Ind: %d | Row Ind: %d .\n',ind_d1,ind_d2);
+
+%get pixel values of horizontal profile
+intensitiesX = A(ind_d2, :);
+%converting every 6.2 pixels to 1mm
+x_axis = linspace(0,206.4516,1280);
+
+%find maximum pixel in profile
+[peak_val, peak_index] = max(intensitiesX);
+%find mm position of the peak value
+peak_mm = x_axis(peak_index);
+
+%find the edge position (peak*e^-2)
+edge_val = peak_val
+
+beam_diam = find(intensitiesX >= hm);
+
+
+fprintf('Peak Position: %d | Peak*e^-2 Position: %d .\n',peak_mm,edge_mm);
+fprintf('Beam Radius: %d.\n',r);
+
+
+figure();
+plot(x_axis,intensitiesX,'o');
+title({'horizontal cross section', "Projection to Source Distance: 50mm"});
+xlabel('mm range');
+ylabel('pixel intensity');
+ylim([0 300])
+

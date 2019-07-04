@@ -47,24 +47,35 @@ cam.Trigger.Set(uc480.Defines.TriggerMode.Software);
 exposure_ms=0.5;%ms
 cam.Timing.Exposure.Set(exposure_ms);
 
+
 %%
+%takes two pictures at each position, at different exposures in order to
+%see the ruler reference
 numOfMove=11;
 position=linspace(7.5,17.5,numOfMove);
 for i=1:numOfMove
-    currentPos=['1PA',num2str(position(i))];
-    fprintf(stepperObject,currentPos)
-    pause(1);
-    % Obtain image information
-    [~, Width, Height, Bits, ~] = cam.Memory.Inquire(MemId);
-    % Acquire image
-    cam.Acquisition.Freeze(uc480.Defines.DeviceParameter.Wait);
-    % Copy image from memory
-    [~, tmp] = cam.Memory.CopyToArray(MemId);
-    % Reshape image
-    Data = reshape(uint8(tmp), [Bits/8, Width, Height]);
-    Data = Data(1:3, 1:Width, 1:Height);
-    Data = permute(Data, [3,2,1]);
-    filename=['exposure0.5/run3_image',num2str(position(i)),'.png'];
-    imwrite(Data,filename);
-    pause(1)
+    for j=1:2
+        if j==1
+            exposure_ms=40.6;%ms
+        else
+            exposure_ms=110;%ms
+        end
+        cam.Timing.Exposure.Set(exposure_ms);
+        currentPos=['1PA',num2str(position(i))];
+        fprintf(stepperObject,currentPos)
+        pause(1);
+        % Obtain image information
+        [~, Width, Height, Bits, ~] = cam.Memory.Inquire(MemId);
+        % Acquire image
+        cam.Acquisition.Freeze(uc480.Defines.DeviceParameter.Wait);
+        % Copy image from memory
+        [~, tmp] = cam.Memory.CopyToArray(MemId);
+        % Reshape image
+        Data = reshape(uint8(tmp), [Bits/8, Width, Height]);
+        Data = Data(1:3, 1:Width, 1:Height);
+        Data = permute(Data, [3,2,1]);
+        filename=['exposure0.5/run3_image',num2str(position(i)),'.png'];
+        imwrite(Data,filename);
+        pause(1)
+    end
 end
